@@ -14,18 +14,12 @@ class ViewController: UICollectionViewController {
     private var groceryList: [GroceryItem] = [GroceryItem(id: "1", title: "1 lb apples"), GroceryItem(id: "2", title: "3 loaves bread"), GroceryItem(id: "3", title: "2 lbs chicken"), GroceryItem(id: "4", title: "5 slices of cheese")]
     let cellIdentifier = "cell"
 
-    private struct Constants {
-        static let horizPadding: CGFloat = 24
-        static let topPadding: CGFloat = 40
-        static let bottomPadding: CGFloat = 0
-        static let defaultInsets: UIEdgeInsets = UIEdgeInsets(top: Constants.topPadding, left: Constants.horizPadding, bottom: Constants.bottomPadding, right: Constants.horizPadding)
-        static let cellSpacing: CGFloat = 5
-    }
+    let defaultInsets: UIEdgeInsets = UIEdgeInsets(top: 40, left: 24, bottom: 0, right: 24)
 
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-        layout.minimumLineSpacing = Constants.cellSpacing
+        layout.minimumLineSpacing = 5
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
 
@@ -40,7 +34,7 @@ class ViewController: UICollectionViewController {
         collectionView.delaysContentTouches = false
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.contentInset = Constants.defaultInsets
+        collectionView.contentInset = defaultInsets
 
         installsStandardGestureForInteractiveMovement = false
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
@@ -81,7 +75,7 @@ extension ViewController: UIGestureRecognizerDelegate {
         case .changed:
             var target = recognizer.location(in: collectionView)
             // locked to vertical only
-            target.x = collectionView.center.x - Constants.defaultInsets.left
+            target.x = collectionView.center.x - defaultInsets.left
             collectionView.updateInteractiveMovementTargetPosition(target)
 
         case .ended:

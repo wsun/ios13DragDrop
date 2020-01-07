@@ -28,9 +28,6 @@ class GroceryCell: UICollectionViewCell {
         label.font = Fonts.title
         label.textColor = Colors.title
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.setContentHuggingPriority(.defaultLow + 1, for: .vertical)
-        label.setContentCompressionResistancePriority(.defaultHigh + 1, for: .vertical)
         return label
     }()
 
